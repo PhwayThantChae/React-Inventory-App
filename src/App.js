@@ -1,25 +1,73 @@
-import logo from './logo.svg';
-import './App.css';
+// Import React
+import React from "react";
 
-function App() {
+// Import Bootstrap
+import { Nav, Navbar, Container, Row, Col } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+
+// Import Custom CSS
+import "./App.css";
+
+// Import from react-router-dom
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+// Import other React Component
+import CreateProduct from "./Components/Product/create-product.component";
+import EditProduct from "./Components/Product/edit-product.component";
+import ProductList from "./Components/Product/product-list.component";
+import Home from "./Components/Product/home";
+
+// App Component
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+        <Navbar bg="dark" variant="dark">
+          <Container>
+          <Navbar.Brand>
+            <Link to={"/create-product"}
+            className="nav-link">
+            Inventory App
+            </Link>
+          </Navbar.Brand>
+
+          <Nav className="justify-content-end">
+            <Nav>
+            <Link to={"/create-product"}
+              className="nav-link">
+              Create Product
+            </Link>
+            </Nav>
+
+            <Nav>
+            <Link to={"/product-list"}
+              className="nav-link">
+              Product List
+            </Link>
+            </Nav>
+          </Nav>
+          </Container>
+        </Navbar>
+        </header>
+
+        <Container>
+        <Row>
+          <Col md={12}>
+          <div className="wrapper">
+            <Routes>
+              <Route exact path="/" element={<ProductList/>} />
+              <Route path="/create-product" element={<CreateProduct/>} />
+              <Route path="/edit-product/:id" element={<EditProduct/>} />
+              <Route path="/product-list" element={<ProductList/>} />
+            </Routes>
+          </div>
+          </Col>
+        </Row>
+        </Container>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
