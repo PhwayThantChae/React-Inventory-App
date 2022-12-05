@@ -42,7 +42,7 @@ const ProductForm = (props) => {
 
 
     const formik = useFormik({
-        initialValues: props.initialValues,
+        initialValues: props.formValues,
         validationSchema,
         onSubmit: props.onSubmit
     });

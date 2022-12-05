@@ -12,6 +12,17 @@ const CreateProduct = () => {
         description: ''
     });
 
+    const handleChange = (selectedOption) => {
+        console.log(selectedOption);
+        console.log("hrere");
+        // props.setFormValues({ ...props, ['categoryId']: selectedOption.value });
+        setFormValues({categoryId:selectedOption.value});
+        console.log(formValues.categoryId);
+        // this.setState({ selectedOption }, () =>
+        // console.log(`Option selected:`, this.state.selectedOption)
+        // );
+    };
+
 
     // On Submit Handler
     const onSubmit = productObject => {
@@ -30,7 +41,7 @@ const CreateProduct = () => {
 
     return(
         <ProductForm initialValues={formValues} formValues={formValues} setFormValues={setFormValues}
-        onSubmit={onSubmit} enableReinitialize>
+        onSubmit={onSubmit} handleChange={handleChange} enableReinitialize>
             Create Product
         </ProductForm>
     )
