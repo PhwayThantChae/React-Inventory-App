@@ -41,11 +41,11 @@ const ProductForm = (props) => {
     });
 
 
-    const formik = useFormik({
-        initialValues: props.initialValues,
-        validationSchema,
-        onSubmit: props.onSubmit
-    });
+    // const formik = useFormik({
+    //     initialValues: props.formValues,
+    //     validationSchema,
+    //     onSubmit: props.onSubmit
+    // });
 
     const handleChange = (selectedOption) => {
         // props.setFormValues({ ...props, ['categoryId']: selectedOption.value });
@@ -92,7 +92,7 @@ const ProductForm = (props) => {
                         <label htmlFor="categoryId" className="mt-2">Category</label>
                         <Select
                             defaultValue={props.categoryId}
-                            onChange={handleChange}
+                            onChange={props.handleChange}
                             options={options}
                         />
                         <ErrorMessage name="categoryId"    className="d-block invalid-feedback"
