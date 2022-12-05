@@ -8,7 +8,7 @@ import CategoryDataService from "../../services/category.service";
 
 const ProductForm = (props) => {
 
-    const [options, setOptions] = useState([""]);
+    const [options, setOptions] = useState([]);
 
     useEffect(() => {
         const getCategoryData = async () => {
@@ -47,9 +47,15 @@ const ProductForm = (props) => {
         onSubmit: props.onSubmit
     });
 
-    const handleChange = (selectedOption) => {
+    const onCategoryChange = (selectedOption) => {
         // props.setFormValues({ ...props, ['categoryId']: selectedOption.value });
-        props.setFormValues({categoryId:selectedOption.value})
+        props.setFormValues({
+            name: formik.values?.name ?? '',
+            price: formik.values?.price ?? '',
+            quantity: formik.values?.quantity ?? '',
+            categoryId: selectedOption.value,
+            description: formik.values?.description ?? '',
+        });
         // this.setState({ selectedOption }, () =>
         // console.log(`Option selected:`, this.state.selectedOption)
         // );
@@ -63,19 +69,19 @@ const ProductForm = (props) => {
                 <Form>
                     <FormGroup>
                         <label htmlFor="name">Product Name</label>
-                        <Field name="name" type="text" className="form-control"/>
+                        <Field name="name" type="text" className="form-control" value={formik.values.name} onChange={formik.handleChange} />
                         <ErrorMessage name="name"    className="d-block invalid-feedback"
                         component="span"/>
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="price" className="mt-2">Price</label>
-                        <Field name="price" type="number" className="form-control"/>
+                        <Field name="price" type="number" className="form-control" value={formik.values.price} onChange={formik.handleChange} />
                         <ErrorMessage name="price"    className="d-block invalid-feedback"
                         component="span"/>
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="quantity" className="mt-2">Quantity</label>
-                        <Field name="quantity" type="number" className="form-control"/>
+                        <Field name="quantity" type="number" className="form-control" value={formik.values.quantity} onChange={formik.handleChange} />
                         <ErrorMessage name="quantity"    className="d-block invalid-feedback"
                         component="span"/>
                     </FormGroup>
@@ -92,7 +98,7 @@ const ProductForm = (props) => {
                         <label htmlFor="categoryId" className="mt-2">Category</label>
                         <Select
                             defaultValue={props.categoryId}
-                            onChange={handleChange}
+                            onChange={onCategoryChange}
                             options={options}
                         />
                         <ErrorMessage name="categoryId"    className="d-block invalid-feedback"
@@ -100,7 +106,7 @@ const ProductForm = (props) => {
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="description" className="mt-2">Description</label>
-                        <Field name="description" type="text" className="form-control"/>
+                        <Field name="description" type="text" className="form-control" value={formik.values.description} onChange={formik.handleChange}  />
                         <ErrorMessage name="description"    className="d-block invalid-feedback"
                         component="span"/>
                     </FormGroup>

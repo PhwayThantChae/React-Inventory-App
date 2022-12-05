@@ -1,5 +1,5 @@
 // Import Modules
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ProductForm from "./ProductForm";
 
 
@@ -10,7 +10,7 @@ const CreateProduct = () => {
         quantity: '',
         categoryId: '',
         description: ''
-    })
+    });
 
 
     // On Submit Handler
