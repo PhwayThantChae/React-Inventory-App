@@ -12,10 +12,9 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 // Import other React Component
-import CreateProduct from "./Components/Product/create-product.component";
-import EditProduct from "./Components/Product/edit-product.component";
-import ProductList from "./Components/Product/product-list.component";
-import Home from "./Components/Product/home";
+import CreateProduct from "./components/product/create-product.component";
+import EditProduct from "./components/product/edit-product.component";
+import ProductList from "./components/product/product-list.component";
 
 // App Component
 const App = () => {

@@ -1,25 +1,61 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, useFormik } from "formik";
 import { FormGroup, FormControl, Button } from "react-bootstrap";
+import Select from 'react-select';
+import CategoryDataService from "../../services/category.service";
 
 
 const ProductForm = (props) => {
+
+    const [options, setOptions] = useState([""]);
+
+    useEffect(() => {
+        const getCategoryData = async () => {
+          const arr = [];
+          await CategoryDataService.getAll().then((res) => {
+            let result = res.data;
+            result.map((category) => {
+              return arr.push({value: category.id, label: category.name});
+            });
+            setOptions(arr)
+          });
+        };
+        getCategoryData();
+    }, []);
+
+
     // Validation schema
     const validationSchema = Yup.object().shape({
-        name: Yup.string().required("Required"),
+        name: Yup.string().required("Product name is required"),
         price: Yup.number()
           .positive("Invalid Price")
           .integer("Invalid Price")
-          .required("Required"),
+          .required("Price is required"),
         quantity: Yup.number()
-          .positive("Invalid Price")
-          .integer("Invalid Price")
-          .required("Required"),
-        categoryId: Yup.string().required("Required"),
-        description: Yup.string().required("Required")
+          .positive("Invalid Quantity")
+          .integer("Invalid Quantity")
+          .required("Quantity is required"),
+        categoryId: Yup.number(),
+        description: Yup.string().required("Description is required")
     });
-    console.log(props);
+
+
+    const formik = useFormik({
+        initialValues: props.initialValues,
+        validationSchema,
+        onSubmit: props.onSubmit
+    });
+
+    const handleChange = (selectedOption) => {
+        // props.setFormValues({ ...props, ['categoryId']: selectedOption.value });
+        props.setFormValues({categoryId:selectedOption.value})
+        // this.setState({ selectedOption }, () =>
+        // console.log(`Option selected:`, this.state.selectedOption)
+        // );
+    };
+
+
     
     return (
         <div className="form-wrapper">
@@ -44,12 +80,21 @@ const ProductForm = (props) => {
                         component="span"/>
                     </FormGroup>
                     <FormGroup>
-                        <label htmlFor="categoryId" className="mt-2">Category</label>
+                        {/* <label htmlFor="categoryId" className="mt-2">Category</label>
+                        <Field name="categoryId" component={SelectField} options={options} />
                         <Field as="select" name="categoryId" className="form-control">
                             <option value="1">Red</option>
                             <option value="2">Green</option>
                             <option value="3">Blue</option>
                         </Field>
+                        <ErrorMessage name="categoryId"    className="d-block invalid-feedback"
+                        component="span"/> */}
+                        <label htmlFor="categoryId" className="mt-2">Category</label>
+                        <Select
+                            defaultValue={props.categoryId}
+                            onChange={handleChange}
+                            options={options}
+                        />
                         <ErrorMessage name="categoryId"    className="d-block invalid-feedback"
                         component="span"/>
                     </FormGroup>

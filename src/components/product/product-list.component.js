@@ -1,16 +1,16 @@
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Table } from "react-bootstrap";
 import ProductTableRow from "./ProductTableRow";
+import ProductDataService from "../../services/product.service";
 
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:4000/inventoy/:id/products")
-        .then(({data}) => {
+        ProductDataService.getAll().then(({data}) => {
+            console.log(data);
             setProducts(data);
         }).catch(error => {
             console.log(error);
@@ -25,7 +25,7 @@ const ProductList = () => {
 
     return (
         <div className="table-wrapper">
-          <Table striped bordered hover>
+          <Table striped bordered hover responsive>
             <thead>
               <tr>
                 <th>Name</th>
@@ -35,7 +35,7 @@ const ProductList = () => {
                 <th>Description</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>{DataTable()}</tbody>
           </Table>
         </div>
       );
