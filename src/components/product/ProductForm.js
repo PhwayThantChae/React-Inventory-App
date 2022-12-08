@@ -1,27 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import * as Yup from "yup";
-import { Formik, Form, Field, ErrorMessage, useFormik } from "formik";
-import { FormGroup, FormControl, Button } from "react-bootstrap";
+import {useParams} from 'react-router-dom';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { FormGroup, Button } from "react-bootstrap";
 import Select from 'react-select';
 import CategoryDataService from "../../services/category.service";
+import ProductDataService from "../../services/product.service";
 
 
 const ProductForm = (props) => {
 
     const [options, setOptions] = useState([]);
+    const [selectCategory, setCategory] = useState(null);
+    const { id } = useParams();
+    const ref = useRef(null);
 
     useEffect(() => {
-        const getCategoryData = async () => {
-          const arr = [];
-          await CategoryDataService.getAll().then((res) => {
-            let result = res.data;
-            result.map((category) => {
-              return arr.push({value: category.id, label: category.name});
+        setCategory({ label: "Kolkata", value: "Kolkata" });
+        async function fetchData() {
+            await CategoryDataService.getAll().then((res) => {
+                const arr = [];
+                let result = res.data;
+                result.map((category) => {
+                    return arr.push({value: category.id, label: category.name});
+                });
+                setOptions(arr);
+                console.log("inside category data");
+              // console.log(arr.find(data => data.value == props.categoryId));
             });
-            setOptions(arr)
-          });
-        };
-        getCategoryData();
+
+            // console.log(props);
+            
+            // await ProductDataService.get(id).then(res => {
+            //     if (res.status >= 200) {
+            //         console.log(res.data);
+            //         console.log(options);
+            //     } else {
+            //         Promise.reject();
+            //     }
+    
+            // }).catch(err => alert("Something went wrong."));
+        }
+        fetchData();
     }, []);
 
 
@@ -37,67 +57,60 @@ const ProductForm = (props) => {
           .integer("Invalid Quantity")
           .required("Quantity is required"),
         categoryId: Yup.number(),
+        inventoryId: Yup.number(),
         description: Yup.string().required("Description is required")
     });
 
 
-    const formik = useFormik({
-        initialValues: props.formValues,
-        validationSchema,
-        onSubmit: props.onSubmit
-    });
-
     const onCategoryChange = (selectedOption) => {
-        // props.setFormValues({ ...props, ['categoryId']: selectedOption.value });
         props.setFormValues({
-            name: formik.values?.name ?? '',
-            price: formik.values?.price ?? '',
-            quantity: formik.values?.quantity ?? '',
+            name: ref.current.values?.name ?? '',
+            price: ref.current.values?.price ?? '',
+            quantity: ref.current.values?.quantity ?? '',
             categoryId: selectedOption.value,
-            description: formik.values?.description ?? '',
+            description: ref.current.values?.description ?? '',
+            inventoryId: ref.current.values?.inventoryId
         });
-        // this.setState({ selectedOption }, () =>
-        // console.log(`Option selected:`, this.state.selectedOption)
-        // );
     };
 
+    // const onInventoryChange = (selectedOption) => {
+    //     props.setFormValues({
+    //         name: ref.current.values?.name ?? '',
+    //         price: ref.current.values?.price ?? '',
+    //         quantity: ref.current.values?.quantity ?? '',
+    //         inventoryId: selectedOption.value,
+    //         description: ref.current.values?.description ?? '',
+    //     });
+    // };
 
     
     return (
         <div className="form-wrapper">
-            <Formik {...props} validationSchema={validationSchema}>
+            <Formik {...props} validationSchema={validationSchema} innerRef={ref} >
                 <Form>
                     <FormGroup>
                         <label htmlFor="name">Product Name</label>
-                        <Field name="name" type="text" className="form-control" value={formik.values.name} onChange={formik.handleChange} />
+                        <Field name="name" type="text" className="form-control" />
                         <ErrorMessage name="name"    className="d-block invalid-feedback"
                         component="span"/>
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="price" className="mt-2">Price</label>
-                        <Field name="price" type="number" className="form-control" value={formik.values.price} onChange={formik.handleChange} />
+                        <Field name="price" type="number" className="form-control" />
                         <ErrorMessage name="price"    className="d-block invalid-feedback"
                         component="span"/>
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="quantity" className="mt-2">Quantity</label>
-                        <Field name="quantity" type="number" className="form-control" value={formik.values.quantity} onChange={formik.handleChange} />
+                        <Field name="quantity" type="number" className="form-control" />
                         <ErrorMessage name="quantity"    className="d-block invalid-feedback"
                         component="span"/>
                     </FormGroup>
                     <FormGroup>
-                        {/* <label htmlFor="categoryId" className="mt-2">Category</label>
-                        <Field name="categoryId" component={SelectField} options={options} />
-                        <Field as="select" name="categoryId" className="form-control">
-                            <option value="1">Red</option>
-                            <option value="2">Green</option>
-                            <option value="3">Blue</option>
-                        </Field>
-                        <ErrorMessage name="categoryId"    className="d-block invalid-feedback"
-                        component="span"/> */}
                         <label htmlFor="categoryId" className="mt-2">Category</label>
                         <Select
-                            defaultValue={props.categoryId}
+                            defaultValue={selectCategory}
+                            // defaultValue={options.find((d) => d.value === f.field1)}
                             onChange={onCategoryChange}
                             options={options}
                         />
@@ -106,7 +119,7 @@ const ProductForm = (props) => {
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="description" className="mt-2">Description</label>
-                        <Field name="description" type="text" className="form-control" value={formik.values.description} onChange={formik.handleChange}  />
+                        <Field name="description" type="text" className="form-control"  />
                         <ErrorMessage name="description"    className="d-block invalid-feedback"
                         component="span"/>
                     </FormGroup>

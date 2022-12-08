@@ -1,47 +1,40 @@
 // Import Modules
 import React, { useState } from "react";
+import {useNavigate} from 'react-router-dom';
 import ProductForm from "./ProductForm";
+import ProductDataService from "../../services/product.service";
 
 
 const CreateProduct = () => {
+    const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
         name: '',
         price: '',
         quantity: '',
         categoryId: '',
-        description: ''
+        description: '',
+        inventoryId: ''
     });
-
-    const handleChange = (selectedOption) => {
-        console.log(selectedOption);
-        console.log("hrere");
-        // props.setFormValues({ ...props, ['categoryId']: selectedOption.value });
-        setFormValues({categoryId:selectedOption.value});
-        console.log(formValues.categoryId);
-        // this.setState({ selectedOption }, () =>
-        // console.log(`Option selected:`, this.state.selectedOption)
-        // );
-    };
 
 
     // On Submit Handler
     const onSubmit = productObject => {
         console.log("product object");
-        console.log("in hrere");
         console.log(productObject);
-        // axios.post('http://localhost:4000/inventoy/:id/products/create',
-        // productObject).then(res => {
-        //     if(res.status === 200) {
-        //         alert('Product was created successfully.'); 
-        //     } else {
-        //         Promise.reject();
-        //     }
-        // }).catch(err => alert("Something went wrong."));
+        ProductDataService.create(productObject).then(res => {
+            console.log(res);
+            if(res.status >= 200) {
+                alert('Product was created successfully.'); 
+                navigate('/product-list');
+            } else {
+                Promise.reject();
+            }
+        }).catch(err => alert("Something went wrong."));
     }
 
     return(
         <ProductForm initialValues={formValues} formValues={formValues} setFormValues={setFormValues}
-        onSubmit={onSubmit} handleChange={handleChange} enableReinitialize>
+        onSubmit={onSubmit} enableReinitialize>
             Create Product
         </ProductForm>
     )
