@@ -1,52 +1,51 @@
 
 import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
-import ProductTableRow from "./ProductTableRow";
-import ProductDataService from "../../services/product.service";
+import InventoryTableRow from "./InventoryTableRow";
+import InventoryDataService from "../../services/inventory.service";
 
 
-const ProductList = () => {
-    const [products, setProducts] = useState([]);
+const InventoryList = () => {
+    const [inventories, setInventories] = useState([]);
 
     useEffect(() => {
-        ProductDataService.getAll().then(({data}) => {
+        InventoryDataService.getAll().then(({data}) => {
             console.log(data);
-            setProducts(data.products);
+            setInventories(data);
         }).catch(error => {
             console.log(error);
         })
     }, []);
 
     const DataTable = () => {
-        return products.map((res, i)  => {
-            return <ProductTableRow obj={res} key={i} />;
+        return inventories.map((res, i)  => {
+            return <InventoryTableRow obj={res} key={i} />;
         });
     };
 
     return (
         <div className="container">
-          <h3>Product</h3>
+          <h3>Inventory</h3>
           <hr></hr>
 
           <div class="d-grid gap-2 d-md-flex justify-content-end mb-3">
-            <Button variant="btn btn-primary me-md-2" href="/create-product">
-                Create Product
+            <Button variant="btn btn-primary me-md-2" href="/create-inventory">
+                Create Inventory
             </Button>
           </div>
+          <div className="clearfix">
           <Table striped bordered hover responsive>
             <thead>
               <tr>
+                <th>Id</th>
                 <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Category</th>
-                <th>Description</th>
               </tr>
             </thead>
             <tbody>{DataTable()}</tbody>
           </Table>
+          </div>
         </div>
       );
 }
 
-export default ProductList;
+export default InventoryList;

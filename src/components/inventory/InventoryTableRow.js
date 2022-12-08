@@ -2,17 +2,17 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import CategoryDataService from "../../services/category.service";
+import InventoryDataService from "../../services/inventory.service";
 
-const CategoryTableRow = (props) => {
+const InventoryTableRow = (props) => {
     
     const {id, name} = props.obj;
 
-    const deleteCategory = () => {
-        CategoryDataService.delete(id).then((res) => {
+    const deleteInventory = () => {
+        InventoryDataService.delete(id).then((res) => {
             console.log(res);
             if (res.status >= 200) {
-                alert("Category successfully deleted");
+                alert("Inventory successfully deleted");
                 window.location.reload();
             } else {
                 Promise.reject();
@@ -27,10 +27,13 @@ const CategoryTableRow = (props) => {
             <td>{id}</td>
             <td>{name}</td>
             <td>
-            {/* <Link className="edit-link" to={"/edit-category/" + id}>
+            {/* <Link className="edit-link" to={"/edit-inventory/" + id}>
               Edit
             </Link> */}
-            <Button onClick={deleteCategory} 
+            <Link className="edit-link" to={"/show-inventory/" + id}>
+              Details
+            </Link> 
+            <Button onClick={deleteInventory} 
               size="sm" variant="danger">
               Delete
             </Button>
@@ -41,4 +44,4 @@ const CategoryTableRow = (props) => {
 
 
 
-export default CategoryTableRow;
+export default InventoryTableRow;

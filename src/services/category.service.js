@@ -1,24 +1,12 @@
-import { categoryAxios as http } from "../http-common";
+import { inventoryAxios as http } from "../http-common";
 
 class CategoryDataService {
     getAll() {
-        return http.get("/category/");
-    }
-
-    get(id) {
-        return http.get(`/category/${id}`);
+        return http.get("/inventory/category/");
     }
 
     create(data) {
-        return http.post("/category", data);
-    }
-
-    update(id, data) {
-        return http.put(`/category/${id}`, data);
-    }
-
-    delete(id) {
-        return http.delete(`/category/${id}`);
+        return http.post("/inventory/categories/", data);
     }
 }
 

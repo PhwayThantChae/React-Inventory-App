@@ -20,7 +20,7 @@ const ProductForm = (props) => {
         async function fetchData() {
             await CategoryDataService.getAll().then((res) => {
                 const arr = [];
-                let result = res.data;
+                let result = res.data.categories;
                 result.map((category) => {
                     return arr.push({value: category.id, label: category.name});
                 });

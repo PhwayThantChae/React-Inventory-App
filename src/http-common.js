@@ -1,16 +1,14 @@
 import axios from "axios";
 
-axios.defaults.headers.post["Content-Type"] = "application/json";
-
-const productAxios = axios.create({
-  baseURL: 'http://localhost:8083'
-});
-
-const categoryAxios = axios.create({
-  baseURL: 'http://localhost:8082'
-});
+const inventoryAxios = axios.create({
+  headers: {
+    "Content-Type": "application/json",
+    "username": "admin",
+    "password": "admin"
+  },
+  baseURL: 'http://localhost:8081'
+})
 
 export {
-  productAxios,
-  categoryAxios
+  inventoryAxios
 };

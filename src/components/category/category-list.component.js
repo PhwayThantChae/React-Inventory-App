@@ -11,7 +11,7 @@ const CategoryList = () => {
     useEffect(() => {
         CategoryDataService.getAll().then(({data}) => {
             console.log(data);
-            setCategories(data);
+            setCategories(data.categories);
         }).catch(error => {
             console.log(error);
         })
@@ -24,11 +24,15 @@ const CategoryList = () => {
     };
 
     return (
-        <div className="table-wrapper">
-            <Button variant="outline-primary mb-3 float-right" href="/create-product">
+        <div className="container">
+          <h3>Category</h3>
+          <hr></hr>
+          <div class="d-grid gap-2 d-md-flex justify-content-end mb-3">
+            <Button variant="btn btn-primary me-md-2" href="/create-category">
                 Create Category
             </Button>
-          <Table striped bordered hover responsive>
+          </div>
+          <Table striped bordered hover responsive compact>
             <thead>
               <tr>
                 <th>Id</th>

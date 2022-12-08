@@ -19,6 +19,13 @@ import ProductList from "./components/product/product-list.component";
 import CreateCategory from "./components/category/create-category.component";
 import EditCategory from "./components/category/edit-category.component";
 import CategoryList from "./components/category/category-list.component";
+
+import CreateInventory from "./components/inventory/create-inventory.component";
+import EditInventory from "./components/inventory/edit-inventory.component";
+import InventoryList from "./components/inventory/inventory-list.component";
+import InventoryDetails from "./components/inventory/show-inventory.component";
+import EditProductQuantity from "./components/inventory/edit-product-quantity.component";
+
 // App Component
 const App = () => {
   return (
@@ -28,24 +35,30 @@ const App = () => {
         <Navbar bg="dark" variant="dark">
           <Container>
           <Navbar.Brand>
-            <Link to={"/create-product"}
+            <Link to={"/inventory-list"}
             className="nav-link">
-            Inventory App
+            Inventory Management System
             </Link>
           </Navbar.Brand>
 
           <Nav className="justify-content-end">
             <Nav>
-            <Link to={"/product-list"}
-              className="nav-link">
-              Products
-            </Link>
+              <Link to={"/inventory-list"}
+                className="nav-link">
+                Inventories
+              </Link>
             </Nav>
             <Nav>
-            <Link to={"/category-list"}
-              className="nav-link">
-              Categories
-            </Link>
+              <Link to={"/product-list"}
+                className="nav-link">
+                Products
+              </Link>
+            </Nav>
+            <Nav>
+              <Link to={"/category-list"}
+                className="nav-link">
+                Categories
+              </Link>
             </Nav>
           </Nav>
           </Container>
@@ -64,6 +77,11 @@ const App = () => {
               <Route path="/create-category" element={<CreateCategory/>} />
               <Route path="/edit-category/:id" element={<EditCategory/>} />
               <Route path="/category-list" element={<CategoryList/>} />
+              <Route path="/inventory-list" element={<InventoryList/>} />
+              <Route path="/create-inventory" element={<CreateInventory/>} />
+              <Route path="/edit-inventory/:id" element={<EditInventory/>} />
+              <Route path="/show-inventory/:id" element={<InventoryDetails/>} />
+              <Route path="/inventory/:id/edit-product-quantity/:productId" element={<EditProductQuantity/>} />
             </Routes>
           </div>
           </Col>
