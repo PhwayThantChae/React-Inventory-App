@@ -10,7 +10,7 @@ const InventoryProductTableRow = (props) => {
     price, quantity, description} = props.obj;
 
     const deleteProductFromInventory = () => {
-        InventoryDataService.delete(iid, pid).then((res) => {
+        InventoryDataService.deleteProductsFromInventory(iid, pid).then((res) => {
             console.log(res);
             if (res.status >= 200) {
                 alert("Product successfully deleted");

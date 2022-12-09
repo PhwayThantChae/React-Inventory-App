@@ -26,15 +26,15 @@ const CategoryTableRow = (props) => {
         <tr>
             <td>{id}</td>
             <td>{name}</td>
-            <td>
+            {/* <td> */}
             {/* <Link className="edit-link" to={"/edit-category/" + id}>
               Edit
             </Link> */}
-            <Button onClick={deleteCategory} 
+            {/* <Button onClick={deleteCategory} 
               size="sm" variant="danger">
               Delete
-            </Button>
-            </td>
+            </Button> */}
+            {/* </td> */}
         </tr>
     )
 }
