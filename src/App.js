@@ -27,6 +27,8 @@ import InventoryDetails from "./components/inventory/show-inventory.component";
 import EditProductQuantity from "./components/inventory/edit-product-quantity.component";
 import AddProductInventory from "./components/inventory/add-product-inventory.component";
 
+import Home from './components/home/home.component';
+
 
 // App Component
 const App = () => {
@@ -34,37 +36,38 @@ const App = () => {
     <Router>
       <div className="App">
         <header className="App-header">
-        <Navbar bg="dark" variant="dark">
-          <Container>
-          <Navbar.Brand>
-            <Link to={"/inventory-list"}
-            className="nav-link">
-            Inventory Management System
-            </Link>
-          </Navbar.Brand>
+          <Navbar bg="dark" variant="dark">
+            <Container>
+            <Navbar.Brand>
+              <Link to={"/"} className="nav-link">
+                Inventory Management System
+              </Link>
+            </Navbar.Brand>
 
-          <Nav className="justify-content-end">
-            <Nav>
-              <Link to={"/inventory-list"}
-                className="nav-link">
-                Inventories
-              </Link>
+            <Nav className="justify-content-end">
+              <Nav>
+                <Link to={"/home"} className="nav-link">
+                  Home
+                </Link>
+              </Nav>
+              <Nav>
+                <Link to={"/inventory-list"} className="nav-link">
+                  Inventories
+                </Link>
+              </Nav>
+              <Nav>
+                <Link to={"/product-list"} className="nav-link">
+                  Products
+                </Link>
+              </Nav>
+              <Nav>
+                <Link to={"/category-list"} className="nav-link">
+                  Categories
+                </Link>
+              </Nav>
             </Nav>
-            <Nav>
-              <Link to={"/product-list"}
-                className="nav-link">
-                Products
-              </Link>
-            </Nav>
-            <Nav>
-              <Link to={"/category-list"}
-                className="nav-link">
-                Categories
-              </Link>
-            </Nav>
-          </Nav>
-          </Container>
-        </Navbar>
+            </Container>
+          </Navbar>
         </header>
 
         <Container>
@@ -72,7 +75,7 @@ const App = () => {
           <Col md={12}>
           <div className="wrapper">
             <Routes>
-              <Route exact path="/" element={<ProductList/>} />
+              <Route exact path="/" element={<Home/>} />
               <Route path="/create-product" element={<CreateProduct/>} />
               <Route path="/edit-product/:id" element={<EditProduct/>} />
               <Route path="/product-list" element={<ProductList/>} />
@@ -85,6 +88,7 @@ const App = () => {
               <Route path="/show-inventory/:id" element={<InventoryDetails/>} />
               <Route path="/inventory/:id/edit-product-quantity/:productId" element={<EditProductQuantity/>} />
               <Route path="/inventory/:id/add-product" element={<AddProductInventory/>} />
+              <Route path="/home" element={<Home/>} />
             </Routes>
           </div>
           </Col>
