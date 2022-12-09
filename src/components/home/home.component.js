@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from "react";
-import { Table, Button } from "react-bootstrap";
 import CategoryList from "../category/category-list.component";
 import InventoryList from "../inventory/inventory-list.component";
 import ProductList from "../product/product-list.component";

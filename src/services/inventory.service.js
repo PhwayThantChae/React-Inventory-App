@@ -36,6 +36,7 @@ class InventoryDataService {
         return http.put(`/inventory/${id}/products/${productId}/`, data);
     }
 
+    // DONE
     deleteProductsFromInventory(inventoryId, productId) {
         return http.delete(`/inventory/${inventoryId}/products/${productId}`)
     }
