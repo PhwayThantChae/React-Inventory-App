@@ -2,6 +2,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Node version
+Node version - 18.12.1
+
+## Docker Setup CMD
+```
+sudo docker build -t inventory-react . 
+
+sudo docker run --name inventory-container -p 3000:3000 inventory-react
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
