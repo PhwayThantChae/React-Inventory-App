@@ -31,7 +31,7 @@ const InventoryDetails = (props) => {
           <hr></hr>
 
           <div className="d-grid gap-2 d-md-flex justify-content-end mb-3">
-            <Button variant="btn btn-primary me-md-2" href="/create-product">
+            <Button variant="btn btn-primary me-md-2" href={`/inventory/${id}/add-product`}>
                 Add Product To Inventory
             </Button>
           </div>

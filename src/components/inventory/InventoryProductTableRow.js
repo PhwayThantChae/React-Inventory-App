@@ -2,7 +2,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ProductDataService from "../../services/product.service";
+import InventoryDataService from "../../services/inventory.service";
 
 const InventoryProductTableRow = (props) => {
     
@@ -10,7 +10,7 @@ const InventoryProductTableRow = (props) => {
     price, quantity, description} = props.obj;
 
     const deleteProductFromInventory = () => {
-        ProductDataService.delete(iid, pid).then((res) => {
+        InventoryDataService.delete(iid, pid).then((res) => {
             console.log(res);
             if (res.status >= 200) {
                 alert("Product successfully deleted");

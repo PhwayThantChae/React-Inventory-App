@@ -86,6 +86,8 @@ const ProductForm = (props) => {
     
     return (
         <div className="form-wrapper">
+            <h3>{props.title}</h3>
+            <hr></hr>
             <Formik {...props} validationSchema={validationSchema} innerRef={ref} >
                 <Form>
                     <FormGroup>
@@ -101,7 +103,7 @@ const ProductForm = (props) => {
                         component="span"/>
                     </FormGroup>
                     <FormGroup>
-                        <label htmlFor="quantity" className="mt-2">Quantity</label>
+                        <label htmlFor="quantity" className="mt-2">Add Quantity</label>
                         <Field name="quantity" type="number" className="form-control" />
                         <ErrorMessage name="quantity"    className="d-block invalid-feedback"
                         component="span"/>

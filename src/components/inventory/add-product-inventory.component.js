@@ -3,12 +3,14 @@ import React, { useState, useEffect } from "react";
 import {useNavigate, useParams} from 'react-router-dom';
 import ProductQuantityForm from "./ProductQuantityForm";
 import InventoryDataService from "../../services/inventory.service";
+import AddProductInventoryForm from "./AddProductInventoryForm";
 
 const AddProductInventory = (props) => {
-    const { id, productId } = useParams();
+    const { id, productId, quantity } = useParams();
     const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
-        productId: ''
+        productId: '',
+        quantity: ''
     });
 
     //onSubmit Handler
@@ -17,22 +19,22 @@ const AddProductInventory = (props) => {
         console.log(obj);
         console.log(id);
         console.log(productId);
-        // InventoryDataService.updateProductQuantityInInventory(id, productId, obj).then((res) => {
-        //     console.log(res);
-        //     if (res.status >= 200) {
-        //         alert("Quantity successfully added.");
-        //         navigate(`/show-inventory/${id}`);
-        //     } else {
-        //         Promise.reject();
-        //     }
-        // }).catch((err) => alert("Something went wrong."));
+        InventoryDataService.addProductsToInventory(id, obj).then((res) => {
+            console.log(res);
+            if (res.status >= 200) {
+                alert("Quantity successfully added.");
+                navigate(`/show-inventory/${id}`);
+            } else {
+                Promise.reject();
+            }
+        }).catch((err) => alert("Something went wrong."));
     };
 
     return(
-        <ProductQuantityForm initialValues={formValues} title="Add Quantity" formValues={formValues} setFormValues={setFormValues}
+        <AddProductInventoryForm initialValues={formValues} title="Add Product To Inventory" formValues={formValues} setFormValues={setFormValues}
         onSubmit={onSubmit} enableReinitialize>
             Update
-        </ProductQuantityForm>
+        </AddProductInventoryForm>
     )
 }
 

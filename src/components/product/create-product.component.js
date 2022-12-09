@@ -33,7 +33,7 @@ const CreateProduct = () => {
     }
 
     return(
-        <ProductForm initialValues={formValues} formValues={formValues} setFormValues={setFormValues}
+        <ProductForm initialValues={formValues} title="Create Product" formValues={formValues} setFormValues={setFormValues}
         onSubmit={onSubmit} enableReinitialize>
             Create Product
         </ProductForm>

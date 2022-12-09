@@ -36,6 +36,7 @@ const EditProduct = (props) => {
     // Load data from server and reinitialize product form
     useEffect(() => {
         ProductDataService.get(id).then(res => {
+            console.log(res);
             if (res.status >= 200) {
                 console.log(res.data);
                 const {name, price, quantity, categoryId, description, inventoryId} = res.data;
@@ -44,7 +45,7 @@ const EditProduct = (props) => {
                 Promise.reject();
             }
 
-        }).catch(err => alert("Something went wrong."));
+        }).catch(err => console.log(err));
     }, []);
 
     // Return product form
@@ -54,7 +55,7 @@ const EditProduct = (props) => {
     // )
 
     return(
-        <ProductForm initialValues={formValues} formValues={formValues} setFormValues={setFormValues}
+        <ProductForm initialValues={formValues} title="Edit Product" formValues={formValues} setFormValues={setFormValues}
         onSubmit={onSubmit} enableReinitialize>
             Update Product
         </ProductForm>

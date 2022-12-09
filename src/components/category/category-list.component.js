@@ -27,7 +27,7 @@ const CategoryList = () => {
         <div className="container">
           <h3>Category</h3>
           <hr></hr>
-          <div class="d-grid gap-2 d-md-flex justify-content-end mb-3">
+          <div className="d-grid gap-2 d-md-flex justify-content-end mb-3">
             <Button variant="btn btn-primary me-md-2" href="/create-category">
                 Create Category
             </Button>

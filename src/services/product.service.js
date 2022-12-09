@@ -5,29 +5,16 @@ class ProductDataService {
         return http.get("/inventory/products/");
     }
 
-    // get(id) {
-    //     return http.get(`/product/${id}`);
-    // }
-
-    // create(data) {
-    //     return http.post("/product", data);
-    // }
-
-    // delete(id) {
-    //     return http.delete(`/product/${id}`);
-    // }
+    get(id) {
+        return http.get(`/inventory/products/${id}/`);
+    }
 
     create(data) {
         return http.post(`/inventory/products/`, data);
     }
 
     update(id, data) {
-        return http.put(`/inventory/products/${id}`, data);
-    }
-
-    
-    delete(inventoryId, productId) {
-        return http.delete(`/inventory/${inventoryId}/products/${productId}`)
+        return http.put(`/inventory/products/${id}/`, data);
     }
 
 

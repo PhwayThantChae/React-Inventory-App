@@ -25,6 +25,8 @@ import EditInventory from "./components/inventory/edit-inventory.component";
 import InventoryList from "./components/inventory/inventory-list.component";
 import InventoryDetails from "./components/inventory/show-inventory.component";
 import EditProductQuantity from "./components/inventory/edit-product-quantity.component";
+import AddProductInventory from "./components/inventory/add-product-inventory.component";
+
 
 // App Component
 const App = () => {
@@ -82,6 +84,7 @@ const App = () => {
               <Route path="/edit-inventory/:id" element={<EditInventory/>} />
               <Route path="/show-inventory/:id" element={<InventoryDetails/>} />
               <Route path="/inventory/:id/edit-product-quantity/:productId" element={<EditProductQuantity/>} />
+              <Route path="/inventory/:id/add-product" element={<AddProductInventory/>} />
             </Routes>
           </div>
           </Col>
