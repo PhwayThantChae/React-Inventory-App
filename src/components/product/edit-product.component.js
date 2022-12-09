@@ -20,6 +20,7 @@ const EditProduct = (props) => {
     const onSubmit = (productObject) => {
         console.log("product object");
         console.log(productObject);
+        console.log(productObject.quantity);
         // axios.put("http://localhost:4000/inventoy/:id/products/update" +
         // props.match.params.id, productObject
         // )
@@ -40,7 +41,13 @@ const EditProduct = (props) => {
             if (res.status >= 200) {
                 console.log(res.data);
                 const {name, price, quantity, categoryId, description, inventoryId} = res.data;
-                setFormValues({name, price, quantity, categoryId, description});
+                setFormValues({
+                    name: name,
+                    price: price,
+                    quantity: 0,
+                    categoryId: categoryId,
+                    description: description
+                });
             } else {
                 Promise.reject();
             }
@@ -48,11 +55,6 @@ const EditProduct = (props) => {
         }).catch(err => console.log(err));
     }, []);
 
-    // Return product form
-    // return (
-    //     <ProductForm initialValues={formValues} onSubmit={onSubmit}
-    //     enableReinitialize> Update Product </ProductForm>
-    // )
 
     return(
         <ProductForm initialValues={formValues} title="Edit Product" formValues={formValues} setFormValues={setFormValues}

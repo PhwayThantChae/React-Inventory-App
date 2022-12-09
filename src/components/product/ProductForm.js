@@ -5,7 +5,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FormGroup, Button } from "react-bootstrap";
 import Select from 'react-select';
 import CategoryDataService from "../../services/category.service";
-import ProductDataService from "../../services/product.service";
 
 
 const ProductForm = (props) => {
@@ -16,7 +15,6 @@ const ProductForm = (props) => {
     const ref = useRef(null);
 
     useEffect(() => {
-        setCategory({ label: "Kolkata", value: "Kolkata" });
         async function fetchData() {
             await CategoryDataService.getAll().then((res) => {
                 const arr = [];
@@ -25,21 +23,7 @@ const ProductForm = (props) => {
                     return arr.push({value: category.id, label: category.name});
                 });
                 setOptions(arr);
-                console.log("inside category data");
-              // console.log(arr.find(data => data.value == props.categoryId));
             });
-
-            // console.log(props);
-            
-            // await ProductDataService.get(id).then(res => {
-            //     if (res.status >= 200) {
-            //         console.log(res.data);
-            //         console.log(options);
-            //     } else {
-            //         Promise.reject();
-            //     }
-    
-            // }).catch(err => alert("Something went wrong."));
         }
         fetchData();
     }, []);
@@ -52,10 +36,7 @@ const ProductForm = (props) => {
           .positive("Invalid Price")
           .integer("Invalid Price")
           .required("Price is required"),
-        quantity: Yup.number()
-          .positive("Invalid Quantity")
-          .integer("Invalid Quantity")
-          .required("Quantity is required"),
+        quantity: Yup.number(),
         categoryId: Yup.number(),
         inventoryId: Yup.number(),
         description: Yup.string().required("Description is required")
@@ -72,16 +53,6 @@ const ProductForm = (props) => {
             inventoryId: ref.current.values?.inventoryId
         });
     };
-
-    // const onInventoryChange = (selectedOption) => {
-    //     props.setFormValues({
-    //         name: ref.current.values?.name ?? '',
-    //         price: ref.current.values?.price ?? '',
-    //         quantity: ref.current.values?.quantity ?? '',
-    //         inventoryId: selectedOption.value,
-    //         description: ref.current.values?.description ?? '',
-    //     });
-    // };
 
     
     return (
@@ -111,8 +82,8 @@ const ProductForm = (props) => {
                     <FormGroup>
                         <label htmlFor="categoryId" className="mt-2">Category</label>
                         <Select
-                            defaultValue={selectCategory}
-                            // defaultValue={options.find((d) => d.value === f.field1)}
+                            // defaultValue={selectCategory}
+                            value={options.find((d) => d.value === props.formValues.categoryId )}
                             onChange={onCategoryChange}
                             options={options}
                         />
