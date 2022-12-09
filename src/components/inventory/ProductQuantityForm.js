@@ -8,7 +8,10 @@ const ProductQuantityForm = (props) => {
 
     // Validation schema
     const validationSchema = Yup.object().shape({
-        quantity: Yup.number().required("Quantity is required")
+        quantity: Yup.number().required("Quantity is required").test(
+            'Is positive?', 
+            'ERROR: The number must not less than than 0.', 
+            (value) => value >= 0)
    });
 
     

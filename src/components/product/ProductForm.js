@@ -36,7 +36,10 @@ const ProductForm = (props) => {
           .positive("Invalid Price")
           .integer("Invalid Price")
           .required("Price is required"),
-        quantity: Yup.number(),
+        quantity: Yup.number().test(
+            'Is positive?', 
+            'ERROR: The number must not be less than 0.', 
+            (value) => value >= 0),
         categoryId: Yup.number(),
         inventoryId: Yup.number(),
         description: Yup.string().required("Description is required")

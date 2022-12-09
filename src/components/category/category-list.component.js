@@ -32,7 +32,7 @@ const CategoryList = () => {
                 Create Category
             </Button>
           </div>
-          <Table striped bordered hover responsive compact>
+          <Table striped bordered hover responsive>
             <thead>
               <tr>
                 <th>Id</th>
