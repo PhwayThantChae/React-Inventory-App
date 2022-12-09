@@ -9,7 +9,7 @@ Node version - 18.12.1
 ```
 sudo docker build -t inventory-react . 
 
-sudo docker run --name inventory-container -p 3000:3000 inventory-react
+sudo docker run --rm --name inventory-container -p 3000:3000 inventory-react
 ```
 
 ## Available Scripts
