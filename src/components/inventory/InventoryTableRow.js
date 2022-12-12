@@ -27,9 +27,6 @@ const InventoryTableRow = (props) => {
             <td>{id}</td>
             <td>{name}</td>
             <td>
-            {/* <Link className="edit-link" to={"/edit-inventory/" + id}>
-              Edit
-            </Link> */}
             <Link className="edit-link" to={"/show-inventory/" + id}>
               Details
             </Link> 

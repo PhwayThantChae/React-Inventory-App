@@ -42,12 +42,6 @@ const EditInventory = (props) => {
         }).catch(err => alert("Something went wrong."));
     }, []);
 
-    // Return product form
-    // return (
-    //     <ProductForm initialValues={formValues} onSubmit={onSubmit}
-    //     enableReinitialize> Update Product </ProductForm>
-    // )
-
     return(
         <InventoryForm initialValues={formValues} title="Edit Inventory" formValues={formValues} setFormValues={setFormValues}
         onSubmit={onSubmit} enableReinitialize>

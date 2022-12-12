@@ -40,12 +40,6 @@ const EditCategory = (props) => {
         }).catch(err => alert("Something went wrong."));
     }, []);
 
-    // Return product form
-    // return (
-    //     <ProductForm initialValues={formValues} onSubmit={onSubmit}
-    //     enableReinitialize> Update Product </ProductForm>
-    // )
-
     return(
         <CategoryForm initialValues={formValues} formValues={formValues} setFormValues={setFormValues}
         onSubmit={onSubmit} enableReinitialize>

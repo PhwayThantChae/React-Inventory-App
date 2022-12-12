@@ -13,7 +13,7 @@ const Home = () => {
                 <InventoryList/>
             </div>
             <div className="mt-5">
-                <ProductList/>
+                <ProductList title="Central Repository For Products" />
             </div>
             <div className="mt-5">
                 <CategoryList/>

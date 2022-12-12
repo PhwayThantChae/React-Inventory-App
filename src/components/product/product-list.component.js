@@ -5,7 +5,7 @@ import ProductTableRow from "./ProductTableRow";
 import ProductDataService from "../../services/product.service";
 
 
-const ProductList = () => {
+const ProductList = (props) => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const ProductList = () => {
 
     return (
         <div className="container">
-          <h3>Product</h3>
+          <h3>Central Repository For Products</h3>
           <hr></hr>
 
           <div className="d-grid gap-2 d-md-flex justify-content-end mb-3">

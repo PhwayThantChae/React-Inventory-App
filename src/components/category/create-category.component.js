@@ -16,14 +16,6 @@ const CreateCategory = () => {
     const onSubmit = async categoryObject => {
         console.log("category object");
         console.log(categoryObject);
-        // await fetch('http://localhost:8081/inventory/categories/', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(categoryObject),
-        // });
         CategoryDataService.create(categoryObject).then(res => {
             console.log(res);
             if(res.status >= 200) {
